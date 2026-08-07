@@ -522,7 +522,7 @@ const student = {
 // console.log(cgpa)
 
 
-// --animation
+// --animation typed.js library
   var typed = new Typed('#text', {
       // strings: ['<i>First</i> sentence.' , '&amp; a second sentence.'],
       strings: ['This is a JavaScript library', 'This is an ES6 module'],
@@ -535,6 +535,6 @@ const student = {
       fadeOutDelay: 600,
   });
 
-// js html dom
+// --js html dom
 // document.getElementById('element').innerText = 'Welcome to JS HTML DOM'
 document.querySelector('h1').innerText = 'Welcome to JS HTML DOM'
