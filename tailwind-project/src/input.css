@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+
+@theme{
+    --color-primary: oklch(66.285% 0.17048 246.411);
+    --breakpoint-xs: 480px;
+    
+}
+/* keyframes */
+@layer components{
+    .card{
+        background-color: var(--color-white);
+        padding: calc(var(--spacing) * 4);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+    }
+}

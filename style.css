@@ -1,0 +1,42 @@
+/* element selector */
+h1 {
+  color: blue;
+}
+p {
+  font-size: 30px;
+  text-align: center;
+  background-color: cornflowerblue;
+}
+
+/* class selector */
+.desc {
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  background-color: plum;
+}
+/* id selector */
+#text {
+  color: orange;
+  font-size: 40px;
+  font-weight: bold;
+  /* shorthand property */
+  text-decoration: underline double red;
+}
+
+/* general styling for buttons */
+.btn {
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* specific styling for each of the buttons */
+.btn-primary {
+  background-color: steelblue;
+  color: white;
+}
+.btn-secondary {
+  background-color: crimson;
+  color: white;
+}

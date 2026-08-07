@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevPulse — Blog</title>
+  <style>
+
+    /* ============================================
+       CSS VARIABLES
+    ============================================ */
+    :root {
+      --primary:      #0ea5e9;
+      --primary-dark: #0284c7;
+      --dark:         #0f172a;
+      --dark-2:       #1e293b;
+      --surface:      #f8fafc;
+      --white:        #ffffff;
+      --text:         #1e293b;
+      --text-muted:   #64748b;
+      --border:       #e2e8f0;
+      --radius:       10px;
+      --tag-bg:       #e0f2fe;
+      --tag-color:    #0369a1;
+    }
+
+    /* ============================================
+       RESET
+    ============================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { font-size: 62.5%; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 1.6rem;
+      background-color: var(--surface);
+      color: var(--text);
+    }
+
+    /* ============================================
+       NAVBAR
+       ↳ flex + justify-content: space-between
+          + nested flex on nav-links
+    ============================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 6rem;
+      height: 6.4rem;
+      z-index: 100;
+
+      /* FLEX PATTERN: logo left, links center, cta right */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--primary); }
+
+    /* nested flex container */
+    .nav-links {
+      display: flex;
+      gap: 3.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-subscribe {
+      background-color: var(--primary);
+      color: var(--white) !important;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      transition: background-color 0.3s ease !important;
+    }
+
+    .nav-subscribe:hover {
+      background-color: var(--primary-dark) !important;
+    }
+
+    /* ============================================
+       HERO BANNER
+       ↳ flex-direction: column + align-items
+    ============================================ */
+    .hero {
+      background-color: var(--dark);
+      margin-top: 6.4rem;
+      padding: 8rem 6rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-tag {
+      background-color: #0ea5e922;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 0.6rem 1.6rem;
+      border-radius: 2rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: 5.2rem;
+      line-height: 1.2;
+      max-width: 700px;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      color: #94a3b8;
+      font-size: 1.8rem;
+      max-width: 520px;
+      margin-bottom: 3.6rem;
+    }
+
+    /* ↳ flex row for category pills */
+    .hero-categories {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      background-color: #ffffff15;
+      color: #cbd5e1;
+      padding: 0.6rem 1.6rem;
+      border-radius: 2rem;
+      font-size: 1.4rem;
+      text-decoration: none;
+      border: 1px solid #ffffff22;
+      transition: all 0.3s ease;
+    }
+
+    .pill:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* ============================================
+       MAIN WRAPPER
+       ↳ SIDEBAR LAYOUT: flex + flex: 0 0 300px
+          + flex: 1 on main content
+    ============================================ */
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+
+      /* FLEX PATTERN: sidebar layout */
+      display: flex;
+      gap: 4rem;
+      align-items: flex-start;
+    }
+
+    /* ============================================
+       MAIN CONTENT AREA
+       ↳ flex: 1 (takes all remaining space)
+    ============================================ */
+    .main-content {
+      flex: 1;      /* grows to fill space left by sidebar */
+      min-width: 0; /* prevents overflow in flex children */
+    }
+
+    /* ── Featured Post ──────────────────────── */
+    .featured-post {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 4rem;
+      overflow: hidden;
+    }
+
+    .featured-thumb {
+      background-color: var(--dark-2);
+      height: 28rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+
+    .featured-body {
+      padding: 3.2rem;
+    }
+
+    .post-meta {
+      /* ↳ flex row: tag + date + read time */
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .post-tag {
+      background-color: var(--tag-bg);
+      color: var(--tag-color);
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .post-date, .post-read {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+    }
+
+    .featured-body h2 {
+      font-size: 2.8rem;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .featured-body p {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ↳ flex row: avatar + name + read more */
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .author-avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.8rem;
+    }
+
+    .author-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .read-more {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .read-more:hover { color: var(--primary-dark); }
+
+    /* ── Article Grid Section heading ────────── */
+    .section-heading {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 2.4rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-heading a {
+      font-size: 1.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── Article Grid ────────────────────────
+       ↳ flex-wrap: wrap + flex: 0 0 calc(50%)
+          so 2 cards per row that wrap
+    ─────────────────────────────────────────── */
+    .articles-grid {
+      display: flex;
+      flex-wrap: wrap;      /* cards wrap to next row */
+      gap: 2.4rem;
+    }
+
+    .article-card {
+      flex: 0 0 calc(50% - 1.2rem);   /* 2 per row */
+      background-color: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    /* ↳ order: moves "Editor's Pick" card to appear first */
+    .article-card.featured-pick {
+      order: -1;
+    }
+
+    .card-thumb {
+      height: 14rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .thumb-blue   { background-color: #dbeafe; }
+    .thumb-green  { background-color: #dcfce7; }
+    .thumb-purple { background-color: #ede9fe; }
+    .thumb-amber  { background-color: #fef3c7; }
+    .thumb-pink   { background-color: #fce7f3; }
+
+    .card-body { padding: 2rem 2.4rem; }
+
+    .card-body .post-meta { margin-bottom: 1rem; }
+
+    .card-body h3 {
+      font-size: 1.7rem;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .card-body p {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       SIDEBAR
+       ↳ flex: 0 0 300px (fixed, never grows)
+          + align-self: flex-start (doesn't
+            stretch to main content height)
+    ============================================ */
+    .sidebar {
+      flex: 0 0 300px;            /* fixed width */
+      align-self: flex-start;     /* doesn't stretch full height */
+      position: sticky;
+      top: 8rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.4rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .widget-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1.6rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* ↳ flex column inside sidebar widget */
+    .trending-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .trending-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .trending-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      flex: 0 0 2rem;
+    }
+
+    .trending-item h4 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+
+    .trending-item span {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    /* Tags widget */
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;   /* ↳ flex-wrap on tags */
+      gap: 0.8rem;
+    }
+
+    .tag {
+      background-color: var(--surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* Newsletter widget */
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .newsletter-form p {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      padding: 1rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1.4rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .newsletter-form button {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* ============================================
+       FOOTER
+       ↳ flex + justify-content: space-between
+          + align-content on wrapped items
+    ============================================ */
+    footer {
+      background-color: var(--dark);
+      padding: 6rem;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 4rem;
+      flex-wrap: wrap;         /* ↳ wraps on smaller screens */
+      align-content: flex-start;
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid #ffffff15;
+    }
+
+    .footer-brand { flex: 0 0 280px; }
+
+    .footer-logo-text {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-logo-text span { color: var(--primary); }
+
+    .footer-brand p {
+      font-size: 1.4rem;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.6rem;
+    }
+
+    /* ↳ flex column for footer links */
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .footer-col ul li a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 1.3rem;
+      color: #475569;
+    }
+
+    .footer-bottom span { color: var(--primary); }
+
+    /* ── Back to top ── */
+    .back-top {
+      position: fixed;
+      bottom: 3rem;
+      right: 3rem;
+      background-color: var(--primary);
+      color: var(--white);
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      text-decoration: none;
+      z-index: 99;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-top:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="nav-logo">Dev<span>Pulse</span></a>
+    <div class="nav-links">
+      <a href="#">JavaScript</a>
+      <a href="#">React</a>
+      <a href="#">Node.js</a>
+      <a href="#">CSS</a>
+      <a href="#" class="nav-subscribe">Subscribe</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">📡 Developer Blog</div>
+    <h1>Learn. Code. <span>Grow.</span></h1>
+    <p>In-depth tutorials, tips and articles for modern web developers at every level.</p>
+    <div class="hero-categories">
+      <a href="#" class="pill">JavaScript</a>
+      <a href="#" class="pill">React</a>
+      <a href="#" class="pill">CSS</a>
+      <a href="#" class="pill">Node.js</a>
+      <a href="#" class="pill">MongoDB</a>
+      <a href="#" class="pill">Git</a>
+    </div>
+  </div>
+
+  <!-- PAGE WRAPPER: sidebar layout -->
+  <div class="page-wrapper">
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- Featured Post -->
+      <div class="featured-post">
+        <div class="featured-thumb">⚛️</div>
+        <div class="featured-body">
+          <div class="post-meta">
+            <span class="post-tag">Featured</span>
+            <span class="post-date">July 9, 2025</span>
+            <span class="post-read">8 min read</span>
+          </div>
+          <h2>Understanding React Hooks: A Complete Guide for 2025</h2>
+          <p>
+            Hooks changed the way we write React components forever. In this
+            deep dive we cover useState, useEffect, useContext, and custom
+            hooks — with real project examples you can use right away.
+          </p>
+          <div class="post-footer">
+            <div class="author">
+              <div class="author-avatar">👨‍💻</div>
+              <span class="author-name">Ahmed Raza</span>
+            </div>
+            <a href="#" class="read-more">Read Article →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Grid -->
+      <div class="section-heading">
+        <span>Latest Articles</span>
+        <a href="#">View all →</a>
+      </div>
+
+      <div class="articles-grid">
+
+        <!-- order: -1 moves this card first visually -->
+        <div class="article-card featured-pick">
+          <div class="card-thumb thumb-amber">⭐</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <span class="post-tag">Editor's Pick</span>
+              <span class="post-read">6 min</span>
+            </div>
+            <h3>CSS Flexbox: The Properties You Actually Use</h3>
+            <p>A focused guide on the flex properties that matter most in real projects — no filler.</p>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="card-thumb thumb-blue">🟦</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <span class="post-tag">JavaScript</span>
+              <span class="post-read">5 min</span>
+            </div>
+            <h3>ES6+ Features Every Developer Should Know</h3>
+            <p>Arrow functions, destructuring, spread, async/await — the modern JS toolkit explained.</p>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="card-thumb thumb-green">🍃</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <span class="post-tag">Node.js</span>
+              <span class="post-read">7 min</span>
+            </div>
+            <h3>Building Your First REST API with Express</h3>
+            <p>Step by step: set up Express, connect MongoDB and build a working CRUD API.</p>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="card-thumb thumb-purple">🔷</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <span class="post-tag">CSS</span>
+              <span class="post-read">4 min</span>
+            </div>
+            <h3>CSS Grid vs Flexbox: When to Use Which</h3>
+            <p>A practical breakdown of when Grid makes more sense than Flexbox and vice versa.</p>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="card-thumb thumb-pink">💠</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <span class="post-tag">React</span>
+              <span class="post-read">9 min</span>
+            </div>
+            <h3>State Management in 2025: Context vs Redux vs Zustand</h3>
+            <p>Choosing the right state tool for your React app depending on scale and complexity.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-widget">
+        <div class="widget-title">🔥 Trending</div>
+        <div class="trending-list">
+          <div class="trending-item">
+            <span class="trending-num">01</span>
+            <div>
+              <h4>Mastering the CSS Box Model</h4>
+              <span>3.2k views</span>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">02</span>
+            <div>
+              <h4>JavaScript Promises vs Async/Await</h4>
+              <span>2.8k views</span>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">03</span>
+            <div>
+              <h4>Git Commands You Need Daily</h4>
+              <span>2.1k views</span>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">04</span>
+            <div>
+              <h4>React Router v6 Full Guide</h4>
+              <span>1.9k views</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">📬 Newsletter</div>
+        <div class="newsletter-form">
+          <p>Get the best dev articles delivered to your inbox every week.</p>
+          <input type="email" placeholder="your@email.com" />
+          <button type="button">Subscribe Free</button>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">🏷️ Topics</div>
+        <div class="tags-cloud">
+          <a href="#" class="tag">JavaScript</a>
+          <a href="#" class="tag">React</a>
+          <a href="#" class="tag">CSS</a>
+          <a href="#" class="tag">Node.js</a>
+          <a href="#" class="tag">MongoDB</a>
+          <a href="#" class="tag">Git</a>
+          <a href="#" class="tag">HTML</a>
+          <a href="#" class="tag">Tailwind</a>
+          <a href="#" class="tag">Express</a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-text">Dev<span>Pulse</span></div>
+        <p>In-depth tutorials and articles for developers who want to level up their skills and build real things.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Node.js</a></li>
+          <li><a href="#">CSS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Write for Us</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <span>DevPulse</span>. All rights reserved.</p>
+      <p>Made with ❤️ for developers</p>
+    </div>
+  </footer>
+
+  <a href="#" class="back-top">↑</a>
+
+</body>
+</html>

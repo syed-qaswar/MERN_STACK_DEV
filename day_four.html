@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* resetting the HTML */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .box-model {
+        border: 2px solid blue;
+        padding: 20px;
+        margin: 10px;
+        width: 400px;
+      }
+
+      .contact-form {
+        padding: 10px;
+        border: 2px solid blueviolet;
+        width: 70%;
+        margin-left: 200px;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #cccccc;
+        border-radius: 5px;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h1 class="box-model">CSS Box Model</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid cumque
+        accusantium eos excepturi praesentium facilis facere officiis unde rem
+        aspernatur ex architecto, at id adipisci, officia laborum provident
+        repudiandae laboriosam?
+      </p>
+
+      <!-- div element -->
+      <div>
+        <h1>Div Title</h1>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+          repellat assumenda itaque recusandae, omnis vitae tempora? Est fugiat
+          officia blanditiis sapiente alias. Cumque facilis mollitia iure, quo
+          eos doloribus repellendus?
+        </p>
+      </div>
+
+      <!-- forms -->
+      <form class="contact-form">
+        <div>
+          <h1>HTML FORM</h1>
+        </div>
+        <label for="name">
+          Enter your name:
+          <input type="text" id="name" placeholder="Full name.." />
+        </label>
+
+        <label for="date">
+          Select a date:
+          <input type="date" id="date" />
+        </label>
+        <input type="number" />
+        <input type="email" />
+
+        <!-- dropdown -->
+        <select name="" id="">
+          <option value="" hidden>Select a city</option>
+          <option value="lahore">Lahore</option>
+          <option value="">Karachi</option>
+          <option value="">Islamabad</option>
+        </select>
+
+        <!-- multi line input -->
+        <label for="feedback">Enter your feedback</label>
+        <textarea name="" id="feedback" rows="4" cols="30"></textarea>
+      </form>
+    </main>
+  </body>
+</html>

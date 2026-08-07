@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataViz — Analytics Dashboard Platform</title>
+  <style>
+
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #ec4899;
+      --dark: #0f172a;
+      --dark-2: #1e293b;
+      --light: #f1f5f9;
+      --light-2: #e2e8f0;
+      --white: #ffffff;
+      --text: #334155;
+      --text-muted: #71849a;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      line-height: 1.6;
+      background-color: #fafbfc;
+    }
+
+    /* ========== SEMANTIC HEADER ========== */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--light-2);
+      padding: 1.2rem 6rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      padding: 0;
+    }
+
+    .nav-container {
+      
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::before {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    main {
+      min-height: calc(100vh - 200px);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 100%);
+      padding: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background-color: #e0e7ff;
+      color: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero h1 {
+      font-size: 4.4rem;
+      line-height: 1.2;
+      color: var(--dark-2);
+      margin-bottom: 1.2rem;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.7rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    .hero-buttons {
+      /* TODO: Add properties here for spacing */
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      padding: 1.1rem 2.6rem;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: var(--white);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: #f0f4ff;
+    }
+
+    .hero-highlight {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .hero-highlight strong {
+      color: var(--text);
+    }
+
+    /* ========== STATS SECTION ========== */
+    .stats {
+      background-color: var(--white);
+      padding: 4rem 6rem;
+    }
+
+    .stats-grid {
+      
+    }
+
+    .stat-card {
+      padding: 2rem;
+      text-align: center;
+      border-radius: var(--radius);
+      background-color: #f8fafc;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-4px);
+    }
+
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ========== FEATURES SECTION ========== */
+    .features {
+      padding: 6rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-tag {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      color: var(--dark-2);
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .section-description {
+      font-size: 1.6rem;
+      color: var(--text-muted);
+    }
+
+    .features-grid {
+     
+    }
+
+    .feature-item {
+      padding: 2.4rem;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.1);
+      transform: translateX(8px);
+    }
+
+    .feature-number {
+      display: inline-block;
+      width: 3.6rem;
+      height: 3.6rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-item h3 {
+      font-size: 1.8rem;
+      color: var(--dark-2);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .feature-item p {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ========== COMPARISON SECTION ========== */
+    .comparison {
+      padding: 6rem;
+      background-color: var(--white);
+    }
+
+    .comparison-table {
+      background-color: #f8fafc;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--light-2);
+    }
+
+    .table-header {
+      background-color: var(--light);
+      padding: 2rem;
+      /* add properties here to create a proper layout */
+    }
+
+    .table-header-cell {
+      font-weight: bold;
+      color: var(--dark-2);
+      font-size: 1.4rem;
+    }
+
+    .table-row {
+      padding: 2rem;
+      border-bottom: 1px solid var(--light-2);
+      /* Add properties here */
+      align-items: center;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .table-label {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1.5rem;
+    }
+
+    .table-cell {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--text-muted);
+    }
+
+    .table-cell.check {
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.8rem;
+    }
+
+    /* ========== TESTIMONIALS SECTION ========== */
+    .testimonials {
+      padding: 6rem;
+      background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 100%);
+    }
+
+    .testimonials-grid {
+      
+    }
+
+    .testimonial {
+      background-color: var(--white);
+      padding: 2.4rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
+    }
+
+    .stars {
+      color: #fbbf24;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1.6rem;
+      line-height: 1.8;
+      min-height: 80px;
+    }
+
+    /* AUTHOR INFO - Will add: display: flex; align-items: center; gap: 1rem; */
+    .testimonial-author {
+      /* Add properties here */
+      border-top: 1px solid var(--light-2);
+      padding-top: 1.6rem;
+    }
+
+    .author-avatar {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: bold;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .author-details {
+      /* Will be inside testimonial-author */
+    }
+
+    .author-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-2);
+      margin-bottom: 0.2rem;
+    }
+
+    .author-role {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== PRICING SECTION ========== */
+    .pricing {
+      padding: 6rem;
+      background-color: var(--white);
+    }
+
+    .pricing-toggle {
+      /* Add propeties here */
+      margin-bottom: 3rem;
+    }
+
+    .toggle-label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .toggle-switch {
+      width: 3.2rem;
+      height: 1.8rem;
+      background-color: var(--light-2);
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-switch.active {
+      background-color: var(--primary);
+    }
+
+    .toggle-dot {
+      width: 1.4rem;
+      height: 1.4rem;
+      background-color: var(--white);
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s ease;
+    }
+
+    .toggle-switch.active .toggle-dot {
+      left: 1.6rem;
+    }
+
+    .savings-badge {
+      background-color: #dcfce7;
+      color: var(--success);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-left: 0.8rem;
+    }
+
+
+    .pricing-grid {
+      /* Add properties here */
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .pricing-card {
+      border: 2px solid var(--light-2);
+      border-radius: var(--radius);
+      padding: 2.4rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--primary);
+      /* transform: scale(1.05); */
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--white);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .pricing-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark-2);
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-description {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .pricing-amount {
+      font-size: 3.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .pricing-period {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features {
+      /* Add properties here */
+      margin-bottom: 2rem;
+    }
+
+    .price-feature {
+      font-size: 1.4rem;
+      color: var(--text);
+      padding-left: 1.8rem;
+      position: relative;
+    }
+
+    .price-feature::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      padding: 6rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .cta p {
+      font-size: 1.7rem;
+      margin-bottom: 2.4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.95;
+    }
+
+    .cta .btn {
+      background-color: var(--white);
+      color: var(--primary);
+    }
+
+    .cta .btn:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* ========== SEMANTIC FOOTER ========== */
+    footer {
+      background-color: var(--dark-2);
+      color: var(--white);
+      padding: 4rem 6rem;
+    }
+    /* for mobile screens */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* justify-items: center; */
+      text-align: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+
+    .footer-bottom {
+      border-top: 1px solid #475569;
+      padding-top: 2rem;
+      /* Add properties here */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 1.4rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    .footer-links {
+      
+    }
+
+    .footer-links a {
+      font-size: 1.4rem;
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* for tablets */
+    @media(min-width: 768px){
+      /* pricing section */
+      .pricing-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid{
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+      .footer-bottom{
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    /* for desktops */
+    @media(min-width: 1024px) {
+      .pricing-grid{
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .pricing-card.popular{transform: scale(1.05);}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================== SEMANTIC HEADER ======================== -->
+  <header>
+    <nav>
+      <div class="nav-container">
+        <!-- TODO: Make this a flex container -->
+        <div class="logo">DataViz</div>
+        <div class="nav-links">
+          <!-- TODO: Make nav-links a flex container -->
+          <a href="#features">Features</a>
+          <a href="#comparison">Comparison</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#" class="nav-cta">Sign In</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ======================== SEMANTIC MAIN ======================== -->
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">Now with AI-Powered Insights</div>
+        <h1>Turn Your Data Into <span>Actionable Insights</span></h1>
+        <p>Real-time analytics dashboard that helps you make smarter business decisions. Visualize complex data with beautiful, interactive charts.</p>
+        
+        <div class="hero-buttons">
+          <!-- TODO: Make hero-buttons a flex container -->
+          <button class="btn btn-primary">Get Started Free</button>
+          <button class="btn btn-secondary">Watch Demo</button>
+        </div>
+
+        <div class="hero-highlight">
+          <span>✓</span>
+          <div><strong>No credit card required.</strong> Start analyzing in minutes.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: STATS -->
+    <section class="stats">
+      <div class="stats-grid">
+        <!-- TODO: Make stats-grid a 4-column CSS Grid -->
+        <div class="stat-card">
+          <div class="stat-number">500K+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2B+</div>
+          <div class="stat-label">Data Points Analyzed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Customer Support</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FEATURES -->
+    <section class="features" id="features">
+      <div class="section-header">
+        <div class="section-tag">Powerful Capabilities</div>
+        <h2 class="section-title">Everything You Need to Succeed</h2>
+        <p class="section-description">Built for teams of all sizes, from startups to enterprises</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- TODO: Make features-grid a 2-column CSS Grid -->
+        <div class="feature-item">
+          <div class="feature-number">1</div>
+          <h3>Real-Time Dashboards</h3>
+          <p>Monitor your key metrics in real-time. Get instant alerts when something important changes. Customizable widgets adapt to your needs.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">2</div>
+          <h3>Advanced Visualizations</h3>
+          <p>Choose from 50+ chart types and visualization options. Create stunning reports that tell your data story in minutes.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">3</div>
+          <h3>AI-Powered Insights</h3>
+          <p>Our AI engine automatically detects patterns and anomalies in your data. Get actionable recommendations without manual analysis.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">4</div>
+          <h3>Seamless Integrations</h3>
+          <p>Connect with 200+ data sources and business tools. Sync data automatically and eliminate manual data entry forever.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">5</div>
+          <h3>Collaborative Workspaces</h3>
+          <p>Share dashboards with team members instantly. Leave comments, annotations, and collaborate in real-time on insights.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">6</div>
+          <h3>Enterprise Security</h3>
+          <p>Bank-level encryption, SSO, SAML, and role-based access control. Compliance with GDPR, SOC2, and HIPAA standards.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: COMPARISON TABLE -->
+    <section class="comparison" id="comparison">
+      <div class="section-header">
+        <div class="section-tag">DataViz vs Competitors</div>
+        <h2 class="section-title">Why Choose DataViz?</h2>
+        <p class="section-description">See how we stack up against the competition</p>
+      </div>
+
+      <div class="comparison-table">
+        <div class="table-header">
+          <!-- TODO: Make table-header a grid with 4 columns -->
+          <div class="table-header-cell">Feature</div>
+          <div class="table-header-cell">DataViz</div>
+          <div class="table-header-cell">Competitor A</div>
+          <div class="table-header-cell">Competitor B</div>
+        </div>
+
+        <div class="table-row">
+          <!-- TODO: Make table-row a grid with 4 columns -->
+          <div class="table-label">Real-Time Analytics</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell">✗</div>
+        </div>
+
+        <div class="table-row">
+          <!-- TODO: Make table-row a grid with 4 columns -->
+          <div class="table-label">AI-Powered Insights</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell">✗</div>
+          <div class="table-cell">✗</div>
+        </div>
+
+        <div class="table-row">
+          <!-- TODO: Make table-row a grid with 4 columns -->
+          <div class="table-label">Free Tier Available</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell">✗</div>
+          <div class="table-cell check">✓</div>
+        </div>
+
+        <div class="table-row">
+          <!-- TODO: Make table-row a grid with 4 columns -->
+          <div class="table-label">24/7 Support</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell check">✓</div>
+          <div class="table-cell">✗</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="section-header">
+        <div class="section-tag">Loved by Teams</div>
+        <h2 class="section-title">Success Stories From Our Customers</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- TODO: Make testimonials-grid a 3-column CSS Grid -->
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"DataViz completely transformed how we analyze customer behavior. The AI insights are incredibly accurate and save us hours every week."</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">SJ</div>
+            <div class="author-details">
+              <div class="author-name">Sarah Johnson</div>
+              <div class="author-role">Growth Manager, TechCorp</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"The ease of use is amazing. Our non-technical team members can now create complex reports without any help. A game-changer!"</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">MK</div>
+            <div class="author-details">
+              <div class="author-name">Mike Kumar</div>
+              <div class="author-role">Head of Analytics, StartupXYZ</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"The integration with our existing tools was seamless. We connected everything in under an hour. Best investment in analytics tools we've made."</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">LC</div>
+            <div class="author-details">
+              <div class="author-name">Lisa Chen</div>
+              <div class="author-role">CTO, InnovateLabs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: PRICING -->
+    <section class="pricing" id="pricing">
+      <div class="section-header">
+        <div class="section-tag">Transparent Pricing</div>
+        <h2 class="section-title">Plans for Every Team Size</h2>
+        <p class="section-description">Start free, scale as you grow. No surprises, no hidden fees.</p>
+      </div>
+
+      <div class="pricing-toggle">
+        <!-- TODO: Make pricing-toggle a flex container -->
+        <span class="toggle-label">Monthly</span>
+        <div class="toggle-switch">
+          <div class="toggle-dot"></div>
+        </div>
+        <span class="toggle-label">Annual <span class="savings-badge">Save 20%</span></span>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- TODO: Make pricing-grid a 3-column CSS Grid -->
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-description">Perfect for individuals</div>
+          <div class="pricing-amount">Free</div>
+          <div class="pricing-period">Forever free</div>
+          <div class="pricing-features">
+            <!-- TODO: Make pricing-features a flex column -->
+            <div class="price-feature">Up to 5 dashboards</div>
+            <div class="price-feature">Basic charts & visuals</div>
+            <div class="price-feature">Community support</div>
+            <div class="price-feature">1 user</div>
+          </div>
+          <button class="btn btn-secondary">Get Started</button>
+        </div>
+
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="pricing-name">Professional</div>
+          <div class="pricing-description">For growing teams</div>
+          <div class="pricing-amount">$49</div>
+          <div class="pricing-period">per month, billed annually</div>
+          <div class="pricing-features">
+            <!-- TODO: Make pricing-features a flex column -->
+            <div class="price-feature">Unlimited dashboards</div>
+            <div class="price-feature">Advanced visualizations</div>
+            <div class="price-feature">Priority email support</div>
+            <div class="price-feature">Up to 5 team members</div>
+            <div class="price-feature">AI-powered insights</div>
+          </div>
+          <button class="btn btn-primary">Start Free Trial</button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-description">For large organizations</div>
+          <div class="pricing-amount">Custom</div>
+          <div class="pricing-period">contact sales for pricing</div>
+          <div class="pricing-features">
+            <!-- TODO: Make pricing-features a flex column -->
+            <div class="price-feature">Everything in Professional</div>
+            <div class="price-feature">Unlimited team members</div>
+            <div class="price-feature">Dedicated account manager</div>
+            <div class="price-feature">Custom integrations</div>
+            <div class="price-feature">SLA guarantee</div>
+          </div>
+          <button class="btn btn-secondary">Contact Sales</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: CTA -->
+    <section class="cta">
+      <h2>Ready to Transform Your Data?</h2>
+      <p>Join 500K+ users who are making better decisions with DataViz</p>
+      <button class="btn btn-primary">Start Your Free Trial Today</button>
+    </section>
+
+  </main>
+
+  <!-- ======================== SEMANTIC FOOTER ======================== -->
+  <footer>
+    <div class="footer-grid">
+      <!-- TODO: Make footer-grid a 4-column CSS Grid -->
+      <section class="footer-section">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Updates</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="#">Tutorials</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Compliance</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <!-- TODO: Make footer-bottom a flex container with space-between -->
+      <p class="footer-copy">&copy; 2025 DataViz Inc. All rights reserved.</p>
+      <div class="footer-links">
+        <!-- TODO: Make footer-links a flex container -->
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

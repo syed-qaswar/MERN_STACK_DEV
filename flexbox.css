@@ -1,0 +1,123 @@
+/* .container{
+    background-color: orangered;
+    padding: 10px;
+    font-size: 30px;
+    height: 50vh;
+    display: flex; */
+    /* flex-direction: column; */
+    /* -main-axis depends upon flex-direction */
+    /* justify-content: space-between; */
+    /* -cross-axis is the exact opposite to main-axis */
+    /* align-items: center; */
+    /* gap: 10px; */
+
+/* } */
+/* .container div{
+    background-color: cadetblue;
+    padding: 20px 10px;
+    flex: 1;
+} */
+
+/* css start */
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --dark: #0f172a;
+    --dark-2: #1e293b;
+    --surface: #f8fafc;
+    --white: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 10px;
+    --tag-bg: #e0f2fe;
+    --tag-color: #0369a1;
+}
+body{font-family: Arial, Helvetica, sans-serif;}
+/* navbar */
+.navbar{
+    background-color: var(--surface);
+    padding: 10px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.navbar .nav-title{color: var(--dark);}
+.nav-title span{color: var(--primary);}
+
+nav a{
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+nav a:hover{color: var(--primary);}
+
+.nav-btn{
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 8px 12px;
+    border-radius: 18px;
+    transition: 0.3s ease;
+}
+.nav-btn:hover{
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+/* hero section */
+.hero{
+    background-color: var(--dark);
+    color: var(--white);
+    height: 70vh;
+
+}
+.hero .container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero .hero-categories{
+    border: 2px solid red;
+    /* width: 60%; */
+    width: 500px;
+    height: 200px;
+    padding: 10px 0px;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.hero-categories .pill{
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    padding: 5px 10px;
+    flex: 1 0 150px;
+}
+
+/* services section */
+.services{
+    background-color: var(--surface);
+}
+.services .container{
+    background-color: var(--dark-2);
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+.container .card{
+    padding: 10px;
+    background-color: var(--primary);
+    width: 30%;
+}

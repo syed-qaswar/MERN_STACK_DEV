@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduReact — Multi-Page Inspiration</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --ink2: #3a3a4a;
+    --muted: #7a7a8a;
+    --surface: #f5f4f0;
+    --white: #ffffff;
+    --accent: #e85a2a;
+    --accent2: #2a6ae8;
+    --green: #1a9e6a;
+    --border: #e2e0da;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── WRAPPER ── */
+  .preview-wrapper {
+    max-width: 980px;
+    margin: 40px auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── DOC HEADER ── */
+  .doc-header {
+    text-align: center;
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .doc-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: #fde8df;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .doc-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .doc-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+  .concept-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--ink2);
+    background: var(--white);
+  }
+
+  /* ── PAGE SECTION ── */
+  .page-section {
+    margin-bottom: 64px;
+  }
+  .page-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .page-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--white);
+    background: var(--ink);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .page-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.4px;
+  }
+  .page-route {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+  .concept-used {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .ctag {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .ctag-orange { background: #fde8df; color: #b03a10; }
+  .ctag-blue   { background: #ddeeff; color: #154ea0; }
+  .ctag-green  { background: #d4f4e8; color: #0e6040; }
+  .ctag-purple { background: #ede8fe; color: #5020a0; }
+
+  /* ── MOCKUP FRAME ── */
+  .mockup {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+  .mockup-bar {
+    background: #f0eeea;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff6058; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #27c93f; }
+  .url-bar {
+    flex: 1;
+    background: var(--white);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    margin-left: 8px;
+  }
+
+  /* ── ANNOTATIONS ── */
+  .annotations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .annotation {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .ann-section {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .ann-title {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .ann-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .ann-concept {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+
+  /* ════════════════════════════════════════
+     PAGE 1 — HOME
+  ════════════════════════════════════════ */
+  .p1-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid #eee;
+  }
+  .p1-logo { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink); }
+  .p1-logo span { color: var(--accent); }
+  .p1-navlinks { display: flex; gap: 24px; }
+  .p1-navlinks a { font-size: 13px; color: var(--ink2); text-decoration: none; }
+  .p1-navlinks a.active { color: var(--accent); font-weight: 500; }
+  .p1-navbtn {
+    font-size: 12px;
+    padding: 8px 18px;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 8px;
+    border: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .p1-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 56px 32px;
+    background: linear-gradient(135deg, #0a0a0f 60%, #1a1a2e);
+  }
+  .p1-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,90,42,.15);
+    border: 1px solid rgba(232,90,42,.3);
+    color: #f08060;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .p1-hero h1 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .p1-hero h1 em { color: var(--accent); font-style: normal; }
+  .p1-hero p { font-size: 14px; color: #9090a8; line-height: 1.7; margin-bottom: 24px; }
+  .p1-hero-btns { display: flex; gap: 10px; }
+  .p1-btn-primary {
+    padding: 11px 22px; background: var(--accent); color: var(--white);
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .p1-btn-secondary {
+    padding: 11px 22px; background: transparent; color: #9090a8;
+    border: 1px solid #333; border-radius: 8px; font-size: 13px; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .p1-hero-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .p1-stat {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .p1-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--white); }
+  .p1-stat-label { font-size: 11px; color: #606078; margin-top: 2px; color: #80809a; }
+  .p1-stat-accent { background: rgba(232,90,42,.12); border-color: rgba(232,90,42,.25); }
+  .p1-stat-accent .p1-stat-num { color: var(--accent); }
+
+  .p1-courses {
+    padding: 40px 32px;
+    background: var(--white);
+  }
+  .p1-sec-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+  .p1-sec-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink); }
+  .p1-see-all { font-size: 12px; color: var(--accent); text-decoration: none; }
+  .p1-course-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .p1-course-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .p1-card-thumb {
+    height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+  .t1 { background: #fff4f0; }
+  .t2 { background: #f0f4ff; }
+  .t3 { background: #f0fff8; }
+  .p1-card-body { padding: 14px; }
+  .p1-card-tag {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--muted); margin-bottom: 4px;
+  }
+  .p1-card-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .p1-card-meta { font-size: 11px; color: var(--muted); }
+  .p1-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .p1-card-price { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--ink); }
+  .p1-card-btn {
+    font-size: 11px; padding: 5px 12px;
+    background: var(--ink); color: var(--white);
+    border: none; border-radius: 6px; cursor: pointer;
+  }
+
+  .p1-features {
+    padding: 40px 32px;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+  }
+  .p1-feat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .p1-feat-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin: 0 auto 12px;
+  }
+  .fi1 { background: #fde8df; }
+  .fi2 { background: #ddeeff; }
+  .fi3 { background: #d4f4e8; }
+  .fi4 { background: #ede8fe; }
+  .p1-feat-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .p1-feat-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* ════════════════════════════════════════
+     PAGE 2 — COURSES
+  ════════════════════════════════════════ */
+  .p2-nav {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 32px; background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .p2-logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--ink); }
+  .p2-logo span { color: var(--accent2); }
+  .p2-search {
+    flex: 1; display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px;
+  }
+  .p2-search input {
+    border: none; background: transparent; font-size: 13px;
+    color: var(--ink); outline: none; flex: 1;
+    font-family: var(--font-body);
+  }
+  .p2-filters { display: flex; gap: 8px; }
+  .p2-filter-btn {
+    font-size: 12px; padding: 7px 14px;
+    border: 1px solid var(--border); background: var(--white);
+    border-radius: 8px; color: var(--ink2); cursor: pointer;
+  }
+  .p2-filter-btn.on { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+  .p2-hero {
+    padding: 36px 32px 28px;
+    background: linear-gradient(135deg, #1a1060 0%, #2a206e 100%);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .p2-hero-left h2 { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--white); letter-spacing: -.5px; margin-bottom: 8px; }
+  .p2-hero-left p { font-size: 13px; color: #a0a0c8; max-width: 360px; line-height: 1.6; }
+  .p2-stats { display: flex; gap: 28px; }
+  .p2-stat-item { text-align: center; }
+  .p2-stat-n { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--white); }
+  .p2-stat-l { font-size: 11px; color: #8080b0; margin-top: 2px; }
+
+  .p2-grid-area {
+    padding: 28px 32px;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+  }
+  .p2-sidebar { }
+  .p2-sidebar-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+  .p2-sidebar-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px; border-radius: 8px; cursor: pointer; margin-bottom: 2px;
+  }
+  .p2-sidebar-item.active { background: var(--white); }
+  .p2-sidebar-item span { font-size: 13px; color: var(--ink2); }
+  .p2-sidebar-item.active span { color: var(--ink); font-weight: 500; }
+  .p2-badge { font-size: 10px; background: var(--border); color: var(--muted); padding: 1px 6px; border-radius: 10px; }
+  .p2-badge.on { background: var(--accent); color: var(--white); }
+  .p2-course-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .p2-list-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; display: flex; gap: 14px;
+  }
+  .p2-list-thumb {
+    width: 56px; height: 56px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .p2-list-info { flex: 1; }
+  .p2-list-tag { font-size: 10px; color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+  .p2-list-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .p2-list-meta { font-size: 11px; color: var(--muted); }
+  .p2-list-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .p2-list-price { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--ink); }
+  .p2-stars { font-size: 10px; color: #f0a020; }
+
+  .p2-cta {
+    padding: 28px 32px; background: var(--white);
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .p2-cta-text h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .p2-cta-text p { font-size: 13px; color: var(--muted); }
+  .p2-cta-btn {
+    padding: 12px 24px; background: var(--accent2); color: var(--white);
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+    font-family: var(--font-body);
+  }
+
+  /* ════════════════════════════════════════
+     PAGE 3 — ABOUT
+  ════════════════════════════════════════ */
+  .p3-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; background: var(--ink);
+  }
+  .p3-logo { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--white); }
+  .p3-logo span { color: #60c8a0; }
+  .p3-links { display: flex; gap: 22px; }
+  .p3-links a { font-size: 13px; color: #80809a; text-decoration: none; }
+  .p3-links a.active { color: var(--white); }
+  .p3-nav-btn {
+    font-size: 12px; padding: 8px 16px;
+    background: #60c8a0; color: var(--ink);
+    border: none; border-radius: 8px; font-weight: 600; cursor: pointer;
+    font-family: var(--font-display);
+  }
+
+  .p3-hero {
+    padding: 52px 32px;
+    background: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .p3-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(96,200,160,.12), transparent 60%);
+  }
+  .p3-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: #60c8a0; background: rgba(96,200,160,.12);
+    border: 1px solid rgba(96,200,160,.25);
+    padding: 5px 12px; border-radius: 20px; margin-bottom: 18px;
+  }
+  .p3-hero h1 {
+    font-family: var(--font-display); font-size: 36px; font-weight: 800;
+    color: var(--white); letter-spacing: -1px; line-height: 1.1; margin-bottom: 16px;
+    position: relative;
+  }
+  .p3-hero p { font-size: 14px; color: #80809a; max-width: 480px; margin: 0 auto; line-height: 1.7; position: relative; }
+
+  .p3-team {
+    padding: 40px 32px;
+    background: var(--surface);
+  }
+  .p3-team-header { text-align: center; margin-bottom: 28px; }
+  .p3-team-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .p3-team-sub { font-size: 13px; color: var(--muted); }
+  .p3-team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .p3-member {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 16px; text-align: center;
+  }
+  .p3-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    margin: 0 auto 12px;
+  }
+  .av1 { background: #fde8df; color: #b03a10; }
+  .av2 { background: #ddeeff; color: #154ea0; }
+  .av3 { background: #d4f4e8; color: #0e6040; }
+  .av4 { background: #ede8fe; color: #5020a0; }
+  .p3-mem-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .p3-mem-role { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .p3-mem-tag {
+    font-size: 10px; padding: 3px 10px; border-radius: 20px;
+    background: var(--surface); color: var(--muted);
+    display: inline-block;
+  }
+
+  .p3-values {
+    padding: 40px 32px;
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; align-items: center;
+  }
+  .p3-val-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.3px; }
+  .p3-val-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .p3-val-list { display: flex; flex-direction: column; gap: 10px; }
+  .p3-val-item { display: flex; align-items: center; gap: 10px; }
+  .p3-val-dot { width: 8px; height: 8px; border-radius: 50%; background: #60c8a0; flex-shrink: 0; }
+  .p3-val-text { font-size: 13px; color: var(--ink2); }
+  .p3-val-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .p3-val-card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; background: var(--surface);
+  }
+  .p3-val-card-icon { font-size: 22px; margin-bottom: 10px; }
+  .p3-val-card-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .p3-val-card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* ════════════════════════════════════════
+     PAGE 4 — CONTACT
+  ════════════════════════════════════════ */
+  .p4-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .p4-logo { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink); }
+  .p4-logo span { color: var(--accent); }
+  .p4-nav-links { display: flex; gap: 22px; }
+  .p4-nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .p4-nav-links a.active { color: var(--accent); font-weight: 500; }
+  .p4-nav-btn {
+    font-size: 12px; padding: 8px 16px;
+    background: var(--ink); color: var(--white);
+    border: none; border-radius: 8px; cursor: pointer;
+    font-family: var(--font-display); font-weight: 600;
+  }
+
+  .p4-hero {
+    padding: 40px 32px;
+    background: linear-gradient(135deg, #fff8f5 0%, #fff4ee 100%);
+    text-align: center;
+    border-bottom: 1px solid #f0e0d8;
+  }
+  .p4-hero-eyebrow { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+  .p4-hero h2 { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--ink); letter-spacing: -.5px; margin-bottom: 10px; }
+  .p4-hero p { font-size: 13px; color: var(--muted); max-width: 400px; margin: 0 auto; line-height: 1.7; }
+
+  .p4-main {
+    padding: 32px 32px;
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 32px;
+  }
+  .p4-info-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+  .p4-info-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .p4-info-item { display: flex; gap: 12px; align-items: flex-start; }
+  .p4-info-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .ii1 { background: #fde8df; }
+  .ii2 { background: #ddeeff; }
+  .ii3 { background: #d4f4e8; }
+  .p4-info-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 2px; }
+  .p4-info-val { font-size: 13px; color: var(--ink2); }
+  .p4-social { display: flex; gap: 8px; }
+  .p4-social-btn {
+    width: 34px; height: 34px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer;
+  }
+
+  .p4-form { }
+  .p4-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .p4-field { display: flex; flex-direction: column; gap: 5px; }
+  .p4-field label { font-size: 12px; font-weight: 500; color: var(--ink2); }
+  .p4-field input, .p4-field textarea, .p4-field select {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; font-size: 13px; color: var(--ink);
+    background: var(--surface); outline: none;
+    font-family: var(--font-body);
+  }
+  .p4-field textarea { height: 80px; resize: none; }
+  .p4-submit {
+    width: 100%; padding: 12px;
+    background: var(--accent); color: var(--white);
+    border: none; border-radius: 8px; font-size: 14px; font-weight: 500;
+    cursor: pointer; font-family: var(--font-display); font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .p4-footer {
+    padding: 20px 32px; background: var(--ink);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .p4-footer-logo { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--white); }
+  .p4-footer-logo span { color: var(--accent); }
+  .p4-footer-text { font-size: 11px; color: #60607a; }
+  .p4-footer-links { display: flex; gap: 16px; }
+  .p4-footer-links a { font-size: 11px; color: #60607a; text-decoration: none; }
+
+  /* ── DIVIDER ── */
+  .page-divider {
+    display: flex; align-items: center; gap: 16px; margin: 48px 0 32px;
+  }
+  .page-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .page-divider-text { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+
+  /* ── SUMMARY ── */
+  .summary-section {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    color: var(--white);
+  }
+  .sum-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; margin-bottom: 6px; letter-spacing: -.3px; }
+  .sum-sub { font-size: 13px; color: #80809a; margin-bottom: 28px; }
+  .sum-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .sum-card {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px; padding: 16px;
+  }
+  .sum-card-page { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: #60607a; margin-bottom: 8px; }
+  .sum-card-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .sum-components { display: flex; flex-wrap: wrap; gap: 4px; }
+  .sum-comp {
+    font-size: 10px; padding: 2px 7px; border-radius: 4px;
+    background: rgba(255,255,255,.08); color: #c0c0d8;
+  }
+  .sum-comp.hi { background: rgba(232,90,42,.2); color: #f08060; }
+
+  @media (max-width: 700px) {
+    .p1-hero, .p2-grid-area, .p3-values, .p4-main { grid-template-columns: 1fr; }
+    .p1-course-grid, .p3-team-grid, .p1-features, .sum-grid { grid-template-columns: 1fr 1fr; }
+    .p1-hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="preview-wrapper">
+
+  <!-- DOC HEADER -->
+  <div class="doc-header">
+    <div class="doc-label">Tailwind CSS — Student Project</div>
+    <h1 class="doc-title">EduReact — Course Platform</h1>
+    <p class="doc-sub">A 4-page inspiration layout to practise Tailwind CSS. Each section maps to a concept you've already covered in class.</p>
+    <div class="concept-pills">
+      <span class="pill">Tailwind CSS</span>
+      <span class="pill">Reusable UI</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ PAGE 1 ═══════════ -->
+  <div class="page-section">
+    <div class="page-label">
+      <div class="page-num">1</div>
+      <div class="page-name">Home Page</div>
+      <div class="page-route">/</div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <div class="url-bar">localhost:5173 /</div>
+      </div>
+
+      <!-- Navbar -->
+      <div class="p1-nav">
+        <div class="p1-logo">Edu<span>React</span></div>
+        <div class="p1-navlinks">
+          <a href="#" class="active">Home</a>
+          <a href="#">Courses</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+        <button class="p1-navbtn">Get Started</button>
+      </div>
+
+      <!-- Hero -->
+      <div class="p1-hero">
+        <div>
+          <div class="p1-hero-badge">🚀 Now with React + Tailwind</div>
+          <h1>Learn to Build <em>Real</em> Web Apps</h1>
+          <p>Master HTML, CSS, Tailwind, JavaScript and ReactJS with hands-on projects and real code you actually understand.</p>
+          <div class="p1-hero-btns">
+            <button class="p1-btn-primary">Explore Courses</button>
+            <button class="p1-btn-secondary">Watch Demo</button>
+          </div>
+        </div>
+        <div class="p1-hero-visual">
+          <div class="p1-stat p1-stat-accent">
+            <div class="p1-stat-num">120+</div>
+            <div class="p1-stat-label">Students enrolled</div>
+          </div>
+          <div class="p1-stat">
+            <div class="p1-stat-num">6</div>
+            <div class="p1-stat-label">Courses available</div>
+          </div>
+          <div class="p1-stat">
+            <div class="p1-stat-num">98%</div>
+            <div class="p1-stat-label">Completion rate</div>
+          </div>
+          <div class="p1-stat p1-stat-accent">
+            <div class="p1-stat-num">4.9★</div>
+            <div class="p1-stat-label">Average rating</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses -->
+      <div class="p1-courses">
+        <div class="p1-sec-header">
+          <div class="p1-sec-title">Featured Courses</div>
+          <a href="#" class="p1-see-all">See all →</a>
+        </div>
+        <div class="p1-course-grid">
+          <div class="p1-course-card">
+            <div class="p1-card-thumb t1">🌐</div>
+            <div class="p1-card-body">
+              <div class="p1-card-tag">Frontend</div>
+              <div class="p1-card-title">HTML & CSS Basics</div>
+              <div class="p1-card-meta">8 lessons · 4 weeks</div>
+              <div class="p1-card-footer">
+                <div class="p1-card-price">Rs. 2,500</div>
+                <button class="p1-card-btn">Enroll</button>
+              </div>
+            </div>
+          </div>
+          <div class="p1-course-card">
+            <div class="p1-card-thumb t2">⚡</div>
+            <div class="p1-card-body">
+              <div class="p1-card-tag">JavaScript</div>
+              <div class="p1-card-title">JS DOM & Arrays</div>
+              <div class="p1-card-meta">12 lessons · 5 weeks</div>
+              <div class="p1-card-footer">
+                <div class="p1-card-price">Rs. 3,500</div>
+                <button class="p1-card-btn">Enroll</button>
+              </div>
+            </div>
+          </div>
+          <div class="p1-course-card">
+            <div class="p1-card-thumb t3">⚛️</div>
+            <div class="p1-card-body">
+              <div class="p1-card-tag">ReactJS</div>
+              <div class="p1-card-title">React + Tailwind</div>
+              <div class="p1-card-meta">15 lessons · 6 weeks</div>
+              <div class="p1-card-footer">
+                <div class="p1-card-price">Rs. 5,000</div>
+                <button class="p1-card-btn">Enroll</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="p1-features">
+        <div class="p1-feat"><div class="p1-feat-icon fi1">🎯</div><div class="p1-feat-title">Task-Based Learning</div><div class="p1-feat-desc">Learn by building real projects from day one</div></div>
+        <div class="p1-feat"><div class="p1-feat-icon fi2">💬</div><div class="p1-feat-title">Live Sessions</div><div class="p1-feat-desc">Interactive classes with your instructor</div></div>
+        <div class="p1-feat"><div class="p1-feat-icon fi3">📄</div><div class="p1-feat-title">Handouts</div><div class="p1-feat-desc">PDF notes after every session</div></div>
+        <div class="p1-feat"><div class="p1-feat-icon fi4">🏆</div><div class="p1-feat-title">Certificate</div><div class="p1-feat-desc">Earn a certificate on completion</div></div>
+      </div>
+    </div>
+
+    
+
+  <div class="page-divider"><div class="page-divider-line"></div><div class="page-divider-text">Page 2</div><div class="page-divider-line"></div></div>
+
+  <!-- ═══════════ PAGE 2 ═══════════ -->
+  <div class="page-section">
+    <div class="page-label">
+      <div class="page-num">2</div>
+      <div class="page-name">Courses Page</div>
+      <div class="page-route">/courses</div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <div class="url-bar">localhost:5173 /courses</div>
+      </div>
+
+      <!-- Navbar with search -->
+      <div class="p2-nav">
+        <div class="p2-logo">Edu<span>React</span></div>
+        <div class="p2-search">
+          <span style="font-size:13px;color:#aaa;">🔍</span>
+          <input placeholder="Search courses..." readonly />
+        </div>
+        <div class="p2-filters">
+          <button class="p2-filter-btn on">All</button>
+          <button class="p2-filter-btn">JS</button>
+          <button class="p2-filter-btn">React</button>
+        </div>
+      </div>
+
+      <!-- Hero strip -->
+      <div class="p2-hero">
+        <div class="p2-hero-left">
+          <h2>All Courses</h2>
+          <p>From HTML basics to full React apps — everything you need to become a frontend developer.</p>
+        </div>
+        <div class="p2-stats">
+          <div class="p2-stat-item"><div class="p2-stat-n">6</div><div class="p2-stat-l">Courses</div></div>
+          <div class="p2-stat-item"><div class="p2-stat-n">120+</div><div class="p2-stat-l">Students</div></div>
+          <div class="p2-stat-item"><div class="p2-stat-n">4.9</div><div class="p2-stat-l">Rating</div></div>
+        </div>
+      </div>
+
+      <!-- Grid with sidebar -->
+      <div class="p2-grid-area">
+        <div class="p2-sidebar">
+          <div class="p2-sidebar-title">Category</div>
+          <div class="p2-sidebar-item active"><span>All Courses</span><span class="p2-badge on">6</span></div>
+          <div class="p2-sidebar-item"><span>HTML & CSS</span><span class="p2-badge">2</span></div>
+          <div class="p2-sidebar-item"><span>JavaScript</span><span class="p2-badge">2</span></div>
+          <div class="p2-sidebar-item"><span>ReactJS</span><span class="p2-badge">2</span></div>
+          <div style="height:16px;"></div>
+          <div class="p2-sidebar-title">Level</div>
+          <div class="p2-sidebar-item active"><span>All Levels</span></div>
+          <div class="p2-sidebar-item"><span>Beginner</span></div>
+          <div class="p2-sidebar-item"><span>Intermediate</span></div>
+        </div>
+        <div class="p2-course-list">
+          <div class="p2-list-card">
+            <div class="p2-list-thumb" style="background:#fff4f0;">🌐</div>
+            <div class="p2-list-info">
+              <div class="p2-list-tag">HTML & CSS</div>
+              <div class="p2-list-title">Web Foundations</div>
+              <div class="p2-list-meta">8 lessons · Beginner</div>
+              <div class="p2-list-footer"><div class="p2-list-price">Rs. 2,500</div><div class="p2-stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="p2-list-card">
+            <div class="p2-list-thumb" style="background:#f5f0ff;">🎨</div>
+            <div class="p2-list-info">
+              <div class="p2-list-tag">CSS</div>
+              <div class="p2-list-title">Tailwind CSS Mastery</div>
+              <div class="p2-list-meta">10 lessons · Beginner</div>
+              <div class="p2-list-footer"><div class="p2-list-price">Rs. 3,000</div><div class="p2-stars">★★★★☆</div></div>
+            </div>
+          </div>
+          <div class="p2-list-card">
+            <div class="p2-list-thumb" style="background:#fffff0;">⚡</div>
+            <div class="p2-list-info">
+              <div class="p2-list-tag">JavaScript</div>
+              <div class="p2-list-title">JS DOM & Arrays</div>
+              <div class="p2-list-meta">12 lessons · Intermediate</div>
+              <div class="p2-list-footer"><div class="p2-list-price">Rs. 3,500</div><div class="p2-stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="p2-list-card">
+            <div class="p2-list-thumb" style="background:#f0fff8;">⚛️</div>
+            <div class="p2-list-info">
+              <div class="p2-list-tag">ReactJS</div>
+              <div class="p2-list-title">React + Vite + Tailwind</div>
+              <div class="p2-list-meta">15 lessons · Intermediate</div>
+              <div class="p2-list-footer"><div class="p2-list-price">Rs. 5,000</div><div class="p2-stars">★★★★★</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="p2-cta">
+        <div class="p2-cta-text">
+          <h3>Can't find what you're looking for?</h3>
+          <p>Request a custom course or get in touch with our team.</p>
+        </div>
+        <button class="p2-cta-btn">Contact Us</button>
+      </div>
+    </div>
+
+    
+  <div class="page-divider"><div class="page-divider-line"></div><div class="page-divider-text">Page 3</div><div class="page-divider-line"></div></div>
+
+  <!-- ═══════════ PAGE 3 ═══════════ -->
+  <div class="page-section">
+    <div class="page-label">
+      <div class="page-num">3</div>
+      <div class="page-name">About Page</div>
+      <div class="page-route">/about</div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <div class="url-bar">localhost:5173 /about</div>
+      </div>
+
+      <!-- Dark navbar -->
+      <div class="p3-nav">
+        <div class="p3-logo">Edu<span>React</span></div>
+        <div class="p3-links">
+          <a href="#">Home</a><a href="#">Courses</a>
+          <a href="#" class="active">About</a><a href="#">Contact</a>
+        </div>
+        <button class="p3-nav-btn">Enroll Now</button>
+      </div>
+
+      <!-- Hero -->
+      <div class="p3-hero">
+        <div class="p3-tag">Our Story</div>
+        <h1>We Teach Code the Right Way</h1>
+        <p>At Corvit Systems, we believe every student deserves to learn web development with real projects, real tools, and real guidance from day one.</p>
+      </div>
+
+      <!-- Team -->
+      <div class="p3-team">
+        <div class="p3-team-header">
+          <div class="p3-team-title">Meet the Team</div>
+          <div class="p3-team-sub">The people who make FIT great</div>
+        </div>
+        <div class="p3-team-grid">
+          <div class="p3-member"><div class="p3-avatar av1">HA</div><div class="p3-mem-name">Hammad Ali</div><div class="p3-mem-role">Lead Instructor</div><span class="p3-mem-tag">ReactJS · JS</span></div>
+          <div class="p3-member"><div class="p3-avatar av2">AA</div><div class="p3-mem-name">Ali Ahmad</div><div class="p3-mem-role">UI Designer</div><span class="p3-mem-tag">Tailwind · CSS</span></div>
+          <div class="p3-member"><div class="p3-avatar av3">SM</div><div class="p3-mem-name">Sara Malik</div><div class="p3-mem-role">Curriculum Lead</div><span class="p3-mem-tag">HTML · JS</span></div>
+          <div class="p3-member"><div class="p3-avatar av4">UH</div><div class="p3-mem-name">Umar Hassan</div><div class="p3-mem-role">Mentor</div><span class="p3-mem-tag">React · Node</span></div>
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div class="p3-values">
+        <div>
+          <div class="p3-val-title">Why Students Choose Us</div>
+          <div class="p3-val-desc">We focus on practical, project-based learning so every student graduates with real work to show.</div>
+          <div class="p3-val-list">
+            <div class="p3-val-item"><div class="p3-val-dot"></div><span class="p3-val-text">Real projects in every session</span></div>
+            <div class="p3-val-item"><div class="p3-val-dot"></div><span class="p3-val-text">PDF notes and handouts provided</span></div>
+            <div class="p3-val-item"><div class="p3-val-dot"></div><span class="p3-val-text">Small class sizes for personal attention</span></div>
+            <div class="p3-val-item"><div class="p3-val-dot"></div><span class="p3-val-text">Industry tools: VS Code, Git, Vercel</span></div>
+          </div>
+        </div>
+        <div class="p3-val-cards">
+          <div class="p3-val-card"><div class="p3-val-card-icon">🎯</div><div class="p3-val-card-title">Project-Based</div><div class="p3-val-card-desc">Every concept backed by a real task</div></div>
+          <div class="p3-val-card"><div class="p3-val-card-icon">🚀</div><div class="p3-val-card-title">Modern Stack</div><div class="p3-val-card-desc">React, Vite, Tailwind, Vercel</div></div>
+          <div class="p3-val-card"><div class="p3-val-card-icon">📜</div><div class="p3-val-card-title">Certified</div><div class="p3-val-card-desc">Certificate on course completion</div></div>
+          <div class="p3-val-card"><div class="p3-val-card-icon">💬</div><div class="p3-val-card-title">Mentorship</div><div class="p3-val-card-desc">Ongoing support after class</div></div>
+        </div>
+      </div>
+    </div>
+
+  
+
+  <div class="page-divider"><div class="page-divider-line"></div><div class="page-divider-text">Page 4</div><div class="page-divider-line"></div></div>
+
+  <!-- ═══════════ PAGE 4 ═══════════ -->
+  <div class="page-section">
+    <div class="page-label">
+      <div class="page-num">4</div>
+      <div class="page-name">Contact Page</div>
+      <div class="page-route">/contact</div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <div class="url-bar">localhost:5173 /contact</div>
+      </div>
+
+      <!-- Navbar -->
+      <div class="p4-nav">
+        <div class="p4-logo">Edu<span>React</span></div>
+        <div class="p4-nav-links">
+          <a href="#">Home</a><a href="#">Courses</a>
+          <a href="#">About</a><a href="#" class="active">Contact</a>
+        </div>
+        <button class="p4-nav-btn">Enroll Now</button>
+      </div>
+
+      <!-- Hero strip -->
+      <div class="p4-hero">
+        <div class="p4-hero-eyebrow">Get in touch</div>
+        <h2>We'd Love to Hear From You</h2>
+        <p>Have a question about a course? Want to enroll? Reach out and we'll respond within 24 hours.</p>
+      </div>
+
+      <!-- Main -->
+      <div class="p4-main">
+        <div>
+          <div class="p4-info-title">Contact Info</div>
+          <div class="p4-info-items">
+            <div class="p4-info-item">
+              <div class="p4-info-icon ii1">📍</div>
+              <div><div class="p4-info-label">Address</div><div class="p4-info-val">Lahore, Pakistan</div></div>
+            </div>
+            <div class="p4-info-item">
+              <div class="p4-info-icon ii2">📧</div>
+              <div><div class="p4-info-label">Email</div><div class="p4-info-val">hello@tecstem.com</div></div>
+            </div>
+            <div class="p4-info-item">
+              <div class="p4-info-icon ii3">📞</div>
+              <div><div class="p4-info-label">Phone</div><div class="p4-info-val">+92 300 000 0000</div></div>
+            </div>
+          </div>
+          <div class="p2-sidebar-title" style="margin-bottom:10px;">Follow Us</div>
+          <div class="p4-social">
+            <div class="p4-social-btn">𝕏</div>
+            <div class="p4-social-btn">in</div>
+            <div class="p4-social-btn">▶</div>
+            <div class="p4-social-btn">ig</div>
+          </div>
+        </div>
+
+        <div class="p4-form">
+          <div class="p4-form-row">
+            <div class="p4-field"><label>First Name</label><input placeholder="Ammar" /></div>
+            <div class="p4-field"><label>Last Name</label><input placeholder="Khan" /></div>
+          </div>
+          <div class="p4-form-row">
+            <div class="p4-field"><label>Email</label><input placeholder="ammar@email.com" /></div>
+            <div class="p4-field"><label>Subject</label>
+              <select><option>Course Inquiry</option><option>Enrollment</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="p4-field" style="margin-bottom:12px;"><label>Message</label><textarea placeholder="Tell us how we can help you..."></textarea></div>
+          <button class="p4-submit">Send Message →</button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="p4-footer">
+        <div class="p4-footer-logo">Edu<span>React</span></div>
+        <div class="p4-footer-text">© 2026 Tecstem Technologies. All rights reserved.</div>
+        <div class="p4-footer-links">
+          <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+</body>
+</html>

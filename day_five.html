@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
+        /* css variables */
+        :root{
+            --primary: #e94560;
+            --dark: #1a1a2e;
+            --dark-2: #16213e;
+            --light: #f0f2f5;
+            --white: #ffffff;
+            --text: #333333;
+        }
+        body{font-family: Arial, Helvetica, sans-serif;}
+        .navbar{
+            background-color: var(--dark);
+            padding: 10px 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .title{color: var(--white);}
+        .navbar .title span{color: var(--primary);}
+        /* .navbar nav{
+
+        } */
+        nav a{
+            color: var(--white);
+            text-decoration: none;
+        }
+        .navbar button{
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--primary);
+            color: var(--light);
+            cursor: pointer;
+        }
+
+        /* css for hero section */
+        .hero{
+            background-color: var(--dark-2);
+            /* 100% of the viewport height */
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1{color: var(--white);}
+        .hero h1 span{color: var(--primary);}
+        .hero p{
+            color: var(--light);
+            margin: 10px 0px;
+        }
+        .hero-btn{
+            background-color: var(--primary);
+            text-decoration: none;
+            color: var(--light);
+            padding: 8px 12px;
+            /* margin: 10px; */
+            display: inline-block;
+        }
+
+
+        /* css for skills section */
+        .skills{
+            background-color: var(--light);
+            height: 80vh;
+            text-align: center;
+        }
+        .skills .container{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .skill-cards{
+            padding: 10px 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .skill-cards .card{
+            background-color: lightgray;
+            border-top: 2px solid var(--primary);
+            border-radius: 5px;
+            padding: 10px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .skill-cards .card:hover{
+            transform: scale(1.05);
+            
+        }
+        .card span{
+            background-color: var(--primary);
+            color: var(--white);
+            font-size: 10px;
+            padding: 5px 7px;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+        }
+        
+        /* css for input field */
+        .text-box:focus{
+            outline: 2px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="title">Web<span>Project</span></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button>Get more details</button>
+        </div>
+        <!-- <div>another element inside header</div> -->
+    </header>
+    <main>
+        <section class="hero">
+            <div>
+                <!-- content -->
+                <h1>Learn. Build. <span>Launch.</span></h1>
+                <p>A full stack development academy helping students go from zero to job-ready in 3 months.</p>
+                <a href="" class="hero-btn">Explore Courses</a>
+                <input type="text" class="text-box">
+            </div>
+        </section>
+
+        <section class="skills">
+            <div class="container">
+                <div>
+                    <h1>What We Offer</h1>
+                    <p>Practical skills, real projects, real results</p>
+                </div>
+                <div class="skill-cards">
+                    <!-- card 1 -->
+                    <div class="card"> 
+                        <span>POPULAR</span>
+                        <h3>MERN Stack</h3>
+                        <p>MongoDB, Express, React & Node.js — the complete modern web stack.</p>
+                    </div>
+                    <!-- card 2 -->
+                    <div class="card">
+                        <span>NEW</span>
+                        <h3>MERN Stack</h3>
+                        <p>MongoDB, Express, React & Node.js — the complete modern web stack.</p>
+                    </div>
+                    <!-- card 3 -->
+                    <div class="card">
+                        <h3>MERN Stack</h3>
+                        <p>MongoDB, Express, React & Node.js — the complete modern web stack.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

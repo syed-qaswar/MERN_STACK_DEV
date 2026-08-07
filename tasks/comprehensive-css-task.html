@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexGen Studio</title>
+  <style>
+
+    /* ============================================
+       CSS VARIABLES
+       ↳ Concept: variables
+    ============================================ */
+    :root {
+      --primary:       #7c3aed;
+      --primary-dark:  #5b21b6;
+      --accent:        #f59e0b;
+      --dark:          #0f0f1a;
+      --dark-2:        #1a1a2e;
+      --light-bg:      #f5f3ff;
+      --white:         #ffffff;
+      --text:          #2d2d2d;
+      --text-muted:    #777777;
+      --radius:        10px;
+    }
+
+    /* ============================================
+       RESET + BASE
+       ↳ Concept: box-sizing, rem unit setup
+    ============================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 1.6rem;
+      background-color: var(--light-bg);
+      color: var(--text);
+    }
+
+    /* ============================================
+       NAVBAR  — position: fixed + flexbox
+       ↳ Concepts: position fixed, z-index,
+                   display flex, justify-content,
+                   align-items
+    ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--dark);
+      padding: 1.8rem 6rem;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      color: var(--white);
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3.2rem;
+    }
+
+    /* ↳ Concepts: pseudo-class :hover, transition */
+    .nav-links a {
+      color: #a0a0c0;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      background-color: var(--primary);
+      color: var(--white) !important;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      transition: background-color 0.3s ease !important;
+    }
+
+    .nav-cta:hover {
+      background-color: var(--primary-dark) !important;
+    }
+
+    /* ============================================
+       HERO  — 100vh, flexbox centered
+       ↳ Concepts: vh unit, flex-direction column,
+                   justify-content center,
+                   align-items center
+    ============================================ */
+    .hero {
+      background-color: var(--dark);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .hero-tag {
+      background-color: #7c3aed22;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 0.6rem 1.6rem;
+      border-radius: 2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: 5.6rem;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      max-width: 750px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: #a0a0c0;
+      font-size: 1.8rem;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 4rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    /* ↳ Concept: pseudo-class + transition on buttons */
+    .btn {
+      padding: 1.4rem 3.2rem;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--white);
+      border: 2px solid #ffffff44;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background-color: #ffffff11;
+    }
+
+    /* ============================================
+       SECTION SHARED STYLES
+    ============================================ */
+    section {
+      padding: 9rem 6rem;
+    }
+
+    .section-label {
+      text-align: center;
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3.6rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.6rem;
+      margin-bottom: 5.6rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================
+       SERVICES — flexbox cards
+       + position absolute badge
+       ↳ Concepts: display flex, gap, flex-wrap
+                   position relative + absolute
+    ============================================ */
+    .services {
+      background-color: var(--white);
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 2.4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ↳ Concept: position relative (for badge) */
+    .card {
+      position: relative;
+      background-color: var(--light-bg);
+      width: 28%;
+      min-width: 240px;
+      padding: 3.6rem 2.8rem;
+      border-radius: var(--radius);
+      border-bottom: 4px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    /* ↳ Concept: pseudo-class :hover + transition */
+    .card:hover {
+      border-bottom-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    /* ↳ Concept: position absolute */
+    .badge {
+      position: absolute;
+      top: 1.6rem;
+      right: 1.6rem;
+      background-color: var(--accent);
+      color: var(--dark);
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      text-transform: uppercase;
+    }
+
+    .card-icon {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .card h3 {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .card p {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       STATS — flexbox with flex:1
+       ↳ Concepts: display flex, flex:1, % unit
+    ============================================ */
+    .stats {
+      background-color: var(--primary);
+      padding: 6rem;
+    }
+
+    .stats-inner {
+      display: flex;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 2.4rem;
+      border-right: 1px solid #ffffff33;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-item h3 {
+      color: var(--white);
+      font-size: 4.8rem;
+      font-weight: bold;
+    }
+
+    .stat-item p {
+      color: #d4b8ff;
+      font-size: 1.5rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ============================================
+       WORK / PORTFOLIO — flex grid
+       ↳ Concepts: flex-wrap, gap, % widths
+    ============================================ */
+    .work {
+      background-color: var(--light-bg);
+    }
+
+    .work-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .work-card {
+      width: calc(50% - 1rem);
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .work-thumb {
+      height: 20rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .work-thumb.purple { background-color: #ede9fe; }
+    .work-thumb.amber  { background-color: #fef3c7; }
+    .work-thumb.green  { background-color: #d1fae5; }
+    .work-thumb.blue   { background-color: #dbeafe; }
+
+    .work-info {
+      padding: 2.4rem;
+    }
+
+    .work-info h4 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .work-info p {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================
+       TEAM — flexbox row
+       ↳ Concepts: display flex, gap, text-align
+    ============================================ */
+    .team {
+      background-color: var(--white);
+    }
+
+    .team-row {
+      display: flex;
+      gap: 3.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .team-card {
+      text-align: center;
+      width: 20%;
+      min-width: 160px;
+    }
+
+    .avatar {
+      width: 9rem;
+      height: 9rem;
+      border-radius: 50%;
+      margin: 0 auto 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.6rem;
+      border: 3px solid var(--primary);
+    }
+
+    .team-card h4 {
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .team-card p {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       CONTACT — form with box model
+       ↳ Concepts: box model, form elements,
+                   div.form-group pattern
+    ============================================ */
+    .contact {
+      background-color: var(--dark-2);
+    }
+
+    .contact .section-title {
+      color: var(--white);
+    }
+
+    .contact .section-sub {
+      color: #a0a0c0;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff0a;
+      border: 1px solid #ffffff11;
+      border-radius: var(--radius);
+      padding: 4rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c0c0e0;
+      margin-bottom: 0.8rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 1.2rem 1.6rem;
+      background-color: #ffffff0d;
+      border: 1px solid #ffffff22;
+      border-radius: 6px;
+      font-size: 1.5rem;
+      color: var(--white);
+      transition: border-color 0.3s ease;
+    }
+
+    /* ↳ Concept: pseudo-class :focus */
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-group textarea {
+      height: 12rem;
+      resize: vertical;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1.4rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 0.8rem;
+    }
+
+    .form-submit:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* ============================================
+       FOOTER — flexbox
+       ↳ Concepts: display flex, justify-content
+    ============================================ */
+    footer {
+      background-color: var(--dark);
+      padding: 4rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      color: var(--white);
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .footer-logo span {
+      color: var(--primary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2.4rem;
+    }
+
+    .footer-links a {
+      color: #a0a0c0;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-copy {
+      color: #666680;
+      font-size: 1.3rem;
+    }
+
+    /* ============================================
+       BACK TO TOP — position fixed
+       ↳ Concepts: position fixed, bottom/right,
+                   pseudo-class :hover, transition
+    ============================================ */
+    .back-top {
+      position: fixed;
+      bottom: 3rem;
+      right: 3rem;
+      background-color: var(--primary);
+      color: var(--white);
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      text-decoration: none;
+      z-index: 99;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-top:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <a href="#home" class="nav-logo">Nex<span>Gen</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Hire Us</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero-tag">✦ Creative Studio</div>
+    <h1>We Build Digital <span>Experiences</span> That Matter</h1>
+    <p>
+      NexGen Studio crafts high-performance websites, apps,
+      and brands that help businesses grow in the digital world.
+    </p>
+    <div class="hero-btns">
+      <a href="#work" class="btn btn-primary">See Our Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="services" id="services">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">Everything your business needs to succeed online</p>
+
+    <div class="cards-row">
+      <div class="card">
+        <span class="badge">Popular</span>
+        <div class="card-icon">🌐</div>
+        <h3>Web Development</h3>
+        <p>Custom websites and web apps built with modern technologies like React and Node.js.</p>
+      </div>
+      <div class="card">
+        <span class="badge">New</span>
+        <div class="card-icon">🎨</div>
+        <h3>UI / UX Design</h3>
+        <p>User-centered design that looks great and converts visitors into customers.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <h3>SEO & Marketing</h3>
+        <p>Data-driven strategies to grow your visibility and reach your target audience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ── -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <h3>150+</h3>
+        <p>Projects Delivered</p>
+      </div>
+      <div class="stat-item">
+        <h3>98%</h3>
+        <p>Client Satisfaction</p>
+      </div>
+      <div class="stat-item">
+        <h3>6+</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <h3>12</h3>
+        <p>Team Members</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORK ── -->
+  <section class="work" id="work">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">Recent Work</h2>
+    <p class="section-sub">A selection of projects we're proud of</p>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb purple">🛒</div>
+        <div class="work-info">
+          <h4>ShopEase — E-Commerce Platform</h4>
+          <p>React · Node.js · MongoDB</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb amber">🍕</div>
+        <div class="work-info">
+          <h4>FoodRush — Restaurant App</h4>
+          <p>React Native · Express · MySQL</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb green">💼</div>
+        <div class="work-info">
+          <h4>HireTrack — Job Board</h4>
+          <p>React · Firebase · Tailwind CSS</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb blue">📚</div>
+        <div class="work-info">
+          <h4>EduPortal — LMS System</h4>
+          <p>MERN Stack · JWT Auth</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEAM ── -->
+  <section class="team" id="team">
+    <p class="section-label">The People</p>
+    <h2 class="section-title">Meet Our Team</h2>
+    <p class="section-sub">Passionate developers and designers working together</p>
+
+    <div class="team-row">
+      <div class="team-card">
+        <div class="avatar">👨‍💻</div>
+        <h4>Ahmed Raza</h4>
+        <p>Lead Developer</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">👩‍🎨</div>
+        <h4>Sara Khan</h4>
+        <p>UI/UX Designer</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">👨‍🔧</div>
+        <h4>Usman Ali</h4>
+        <p>Backend Engineer</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">👩‍💼</div>
+        <h4>Aisha Malik</h4>
+        <p>Project Manager</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact" id="contact">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Start a Project</h2>
+    <p class="section-sub">Tell us about your idea and we'll get back to you within 24 hours</p>
+
+    <form class="contact-form" action="#" method="post">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Ali" />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Hassan" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="ali@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="service">Service Needed</label>
+        <select id="service">
+          <option value="">-- Select a service --</option>
+          <option>Web Development</option>
+          <option>UI / UX Design</option>
+          <option>SEO & Marketing</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Project Details</label>
+        <textarea id="message" placeholder="Tell us about your project..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">Nex<span>Gen</span></div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="footer-copy">&copy; 2025 NexGen Studio</p>
+  </footer>
+
+  <!-- ── BACK TO TOP ── -->
+  <a href="#home" class="back-top">↑</a>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+*{padding: 0; margin: 0; box-sizing: border-box;}
+
+.wrapper{
+    background-color: lightskyblue;
+
+    display: flex;
+    gap: 10px;
+}
+.latest{
+    padding: 15px 10px;
+    height: 80vh;
+}
+.latest h1{margin: 10px 0px ;}
+.latest .container{
+    display: grid;
+    grid-template-columns: 400px 400px;
+    justify-content: center;
+    /* align-content: center; */
+    gap: 5px;
+    /* height: 100vh; */
+}
+.latest .card{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+.latest .card-1{grid-column: 1 / 3;}
+
+/* sidebar styling */
+.lft-sidebar div{
+    background-color: white;
+    padding: 10px;
+}

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechPro — Digital Solutions</title>
+  <style>
+
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --secondary: #f59e0b;
+      --dark: #1e293b;
+      --dark-2: #0f172a;
+      --light-bg: #f8fafc;
+      --white: #ffffff;
+      --text: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.6;
+      background-color: var(--light-bg);
+    }
+
+    /* ========== SEMANTIC HEADER ========== */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.6rem 6rem;
+    }
+
+    /* NAVIGATION - Will add: display: flex; justify-content: space-between; */
+    nav {
+      padding: 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 0.8rem 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links .btn-cta {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 1.6rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links .btn-cta:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    main {
+      min-height: calc(100vh - 200px);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+      padding: 8rem 6rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.6rem;
+      color: var(--dark-2);
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      /* font-size: 1.8rem; */
+      color: var(--text-muted);
+      margin-bottom: 2.4rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    } 
+
+    .btn {
+      padding: 1.2rem 2.8rem;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* ========== FEATURES SECTION ========== */
+    .features {
+      padding: 6rem;
+      background-color: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      color: var(--dark-2);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-description {
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* FEATURES GRID - Will add: display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background-color: var(--light-bg);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(4, 173, 246, 0.201);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.8rem;
+      color: var(--dark-2);
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card p {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ========== SHOWCASE SECTION ========== */
+    .showcase {
+      padding: 6rem;
+      background-color: var(--light-bg);
+    }
+
+    /* SHOWCASE CONTENT - Will add: display: flex; gap: 4rem; align-items: center; */
+    .showcase-content {
+      /* display: flex; */
+      /* align-items: center; */
+    }
+
+    .showcase-text {
+      flex: 1;
+    }
+
+    .showcase-text h2 {
+      font-size: 2.6rem;
+      color: var(--dark-2);
+      margin-bottom: 1.6rem;
+      line-height: 1.3;
+    }
+
+    .showcase-text p {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .showcase-image {
+      flex: 1;
+      background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+      height: 350px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    /* ========== PRICING SECTION ========== */
+    .pricing {
+      padding: 6rem;
+      background-color: var(--white);
+    }
+
+    /* PRICING GRID - Will add: display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      padding: 2.4rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
+      transform: translateY(-12px);
+    }
+
+    .pricing-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .price-label {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-card h3 {
+      font-size: 2rem;
+      color: var(--dark-2);
+      margin-bottom: 0.8rem;
+    }
+
+    .price {
+      font-size: 3.2rem;
+      color: var(--primary);
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-period {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .price-features {
+      /* TODO: Add display: flex; flex-direction: column; gap: 0.8rem; */
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .price-feature {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    /* ========== TESTIMONIALS SECTION ========== */
+    .testimonials {
+      padding: 6rem;
+      background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+    }
+
+    /* TESTIMONIALS GRID - Will add: display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .testimonial-card {
+      background-color: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .testimonial-text {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1.6rem;
+      line-height: 1.8;
+    }
+
+    /* TESTIMONIAL AUTHOR - Will add: display: flex; align-items: center; gap: 1rem; */
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .author-info {
+      /* Will be inside testimonial-author */
+    }
+
+    .author-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--dark-2);
+    }
+
+    .author-title {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      padding: 4rem 6rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta .btn {
+      background-color: var(--white);
+      color: var(--primary);
+    }
+
+    .cta .btn:hover {
+      background-color: var(--light-bg);
+    }
+
+    /* ========== SEMANTIC FOOTER ========== */
+    footer {
+      background-color: var(--dark-2);
+      color: var(--white);
+      padding: 4rem 6rem;
+    }
+
+    /* FOOTER CONTENT - Will add: display: flex; gap: 4rem; */
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section {
+      /* flex: 1; */
+    }
+
+    .footer-section h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      color: var(--white);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    /* FOOTER BOTTOM - Will add: display: flex; justify-content: space-between; align-items: center; */
+    .footer-bottom {
+      border-top: 1px solid #475569;
+      padding-top: 2rem;
+
+    }
+
+    .footer-copy {
+      font-size: 1.4rem;
+      color: #94a3b8;
+    }
+
+    .footer-social {
+      /* TODO: Add display: flex; gap: 1.6rem; */
+    }
+
+    .social-link {
+      width: 2.4rem;
+      height: 2.4rem;
+      background-color: #475569;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* media queries */
+    @media(min-width: 480px){
+      body{
+        font-size: 18px;
+      }
+      .hero{
+        font-size: 3.5rem;
+      }
+    }
+    @media(min-width: 768px){
+      body{
+        font-size: 20px;
+      }
+      .hero{
+        font-size: 4.8rem;
+      }
+      .showcase-content{
+        display: flex;
+        .showcase-image{
+          order: 2;
+        }
+        .showcase-text{
+          order: 1;
+        }
+      }
+      .pricing-grid{
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+ 
+
+  </style>
+</head>
+<body>
+
+  <!-- ======================== SEMANTIC HEADER ======================== -->
+  <header>
+    <nav>
+      <div class="nav-container">
+        <!-- TODO: Make this a flex container with space-between -->
+        <div class="logo">TechPro</div>
+        <div class="nav-links">
+          <!-- TODO: Make nav-links a flex container -->
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact" class="btn-cta">Get Started</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ======================== SEMANTIC MAIN ======================== -->
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Build Your Digital Future</h1>
+        <p>Modern solutions for businesses of all sizes. Scalable, secure, and built with cutting-edge technology.</p>
+        <div class="hero-buttons">
+          <!-- TODO: Make hero-buttons a flex container -->
+          <button class="btn btn-primary">Start Free Trial</button>
+          <button class="btn btn-outline">Watch Demo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FEATURES -->
+    <section class="features" id="features">
+      <div class="section-header">
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">Powerful Features</h2>
+        <p class="section-description">Everything you need to succeed in one platform</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- TODO: Make this a 3-column CSS Grid -->
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Optimized performance for speed and reliability. Your users will love the responsiveness.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure & Safe</h3>
+          <p>Enterprise-grade security. Your data is protected with industry-leading encryption standards.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Advanced Analytics</h3>
+          <p>Real-time insights and detailed reports. Make data-driven decisions with confidence.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SHOWCASE -->
+    <section class="showcase">
+      <div class="showcase-content">
+        <!-- TODO: Make showcase-content a flex container -->
+        <div class="showcase-image">
+          🔗
+        </div>
+        <div class="showcase-text">
+          <h2>Seamless Integration</h2>
+          <p>Connect all your tools in minutes. Our platform integrates with 500+ popular applications, making your workflow smoother than ever.</p>
+          <p>Automate repetitive tasks and focus on what matters most — growing your business.</p>
+          <button class="btn btn-primary">Learn More</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: PRICING -->
+    <section class="pricing" id="pricing">
+      <div class="section-header">
+        <div class="section-label">Transparent Pricing</div>
+        <h2 class="section-title">Simple Plans for Every Business</h2>
+        <p class="section-description">Choose the perfect plan for your needs. No hidden fees.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- TODO: Make this a 3-column CSS Grid -->
+        <div class="pricing-card">
+          <div class="price-label">Starter</div>
+          <h3>Perfect for Small Teams</h3>
+          <div class="price">$29</div>
+          <div class="price-period">per month</div>
+          <div class="price-features">
+            <!-- TODO: Make price-features a flex column -->
+            <div class="price-feature">✓ Up to 10 users</div>
+            <div class="price-feature">✓ Basic analytics</div>
+            <div class="price-feature">✓ Email support</div>
+            <div class="price-feature">✗ API access</div>
+          </div>
+          <button class="btn btn-primary">Choose Plan</button>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="price-label">Professional</div>
+          <h3>Most Popular</h3>
+          <div class="price">$79</div>
+          <div class="price-period">per month</div>
+          <div class="price-features">
+            <!-- TODO: Make price-features a flex column -->
+            <div class="price-feature">✓ Up to 50 users</div>
+            <div class="price-feature">✓ Advanced analytics</div>
+            <div class="price-feature">✓ Priority support</div>
+            <div class="price-feature">✓ API access</div>
+          </div>
+          <button class="btn btn-primary">Choose Plan</button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="price-label">Enterprise</div>
+          <h3>For Large Organizations</h3>
+          <div class="price">Custom</div>
+          <div class="price-period">per month</div>
+          <div class="price-features">
+            <!-- TODO: Make price-features a flex column -->
+            <div class="price-feature">✓ Unlimited users</div>
+            <div class="price-feature">✓ Custom analytics</div>
+            <div class="price-feature">✓ Dedicated support</div>
+            <div class="price-feature">✓ Full API access</div>
+          </div>
+          <button class="btn btn-outline">Contact Sales</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+      <div class="section-header">
+        <div class="section-label">Success Stories</div>
+        <h2 class="section-title">What Our Customers Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- TODO: Make this a 2-column CSS Grid -->
+        <div class="testimonial-card">
+          <div class="testimonial-text">"TechPro transformed our workflow completely. We're 40% more productive now. Highly recommended!"</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">AK</div>
+            <div class="author-info">
+              <div class="author-name">Aisha Khan</div>
+              <div class="author-title">CEO, StartupXYZ</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">"The support team is amazing. Any issues are resolved within hours. Best investment we've made."</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">UR</div>
+            <div class="author-info">
+              <div class="author-name">Usman Raza</div>
+              <div class="author-title">Founder, TechHub</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">"Seamless integration with all our tools. The dashboard is intuitive and powerful. Love it!"</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">SM</div>
+            <div class="author-info">
+              <div class="author-name">Sara Malik</div>
+              <div class="author-title">Product Manager, InnovateCo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">"Outstanding platform. We've reduced our operational costs significantly. Definitely recommend!"</div>
+          <div class="testimonial-author">
+            <!-- TODO: Make testimonial-author a flex container -->
+            <div class="author-avatar">AH</div>
+            <div class="author-info">
+              <div class="author-name">Ahmed Hassan</div>
+              <div class="author-title">Operations Director, GlobalTech</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CTA (Call To Action) -->
+    <section class="cta" id="contact">
+      <h2>Ready to Get Started?</h2>
+      <p>Join thousands of companies using TechPro to transform their business</p>
+      <button class="btn btn-primary">Start Your Free Trial</button>
+    </section>
+
+  </main>
+
+  <!-- ======================== SEMANTIC FOOTER ======================== -->
+  <footer>
+    <div class="footer-content">
+      <!-- TODO: Make footer-content a flex container with gap -->
+      <section class="footer-section">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <!-- TODO: Make footer-bottom a flex container with space-between -->
+      <p class="footer-copy">&copy; 2025 TechPro. All rights reserved.</p>
+      <div class="footer-social">
+        <!-- TODO: Make footer-social a flex container -->
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">𝕏</a>
+        <a href="#" class="social-link">in</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+
+<!-- 10PX 1REM = 10PX-->
