@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
     <style>
         .typed-cursor {
@@ -16,10 +17,27 @@
 </head>
 <body>
     <!-- for the typed.js library -->
-    <span id="text"> </span>
+    <!-- <span id="text"> </span> -->
 
     <!-- for js html dom -->
-    <h1 id="element"></h1>
+    <!-- <h1 id="element"></h1> -->
+
+    <!-- input to take value -->
+    <!-- <h1 id="text"></h1>
+    <input type="text" id="user-input">
+
+    <div id="element"></div>
+    <button onclick="userInput()">Show Text</button> -->
+
+    <!-- TO-DO LIST -->
+    <div>
+        <h1 class="text-4xl font-bold">To-do List</h1>
+        <div class="flex">
+            <input type="text" id="task-input" class="border-2 border-blue-400 rounded-lg p-2">
+            <button id="add-btn" class="font-semibold bg-amber-300 px-4 py-2.5 rounded-lg">Add Task</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
 
     
     <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>

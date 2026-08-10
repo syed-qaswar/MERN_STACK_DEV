@@ -523,18 +523,67 @@ const student = {
 
 
 // --animation typed.js library
-  var typed = new Typed('#text', {
-      // strings: ['<i>First</i> sentence.' , '&amp; a second sentence.'],
-      strings: ['This is a JavaScript library', 'This is an ES6 module'],
-      typeSpeed: 50,
-      // backSpeed: 40,
-      loop: true,
-      // smartBackspace: true,
-      fadeOut: true,
-      fadeOutClass: 'typed-fade-out',
-      fadeOutDelay: 600,
-  });
+  // var typed = new Typed('#text', {
+  //     // strings: ['<i>First</i> sentence.' , '&amp; a second sentence.'],
+  //     strings: ['This is a JavaScript library', 'This is an ES6 module'],
+  //     typeSpeed: 50,
+  //     // backSpeed: 40,
+  //     loop: true,
+  //     // smartBackspace: true,
+  //     fadeOut: true,
+  //     fadeOutClass: 'typed-fade-out',
+  //     fadeOutDelay: 600,
+  // });
 
 // --js html dom
 // document.getElementById('element').innerText = 'Welcome to JS HTML DOM'
-document.querySelector('h1').innerText = 'Welcome to JS HTML DOM'
+// document.querySelector('h1').innerText = 'Welcome to JS HTML DOM'
+
+
+// function userInput(){
+//   let user_input = document.getElementById('user-input').value;
+//   document.getElementById('text').innerText = user_input.toUpperCase();
+
+//   // --adding a new element
+//   let h2 = document.createElement('h2');
+
+//   h2.textContent = 'Hi new element'
+//   document.getElementById('element').appendChild(h2);
+// }
+
+// --To-do list
+document.querySelector('#add-btn').addEventListener('click', function(){
+  let task = document.getElementById('task-input')
+  let task_text = task.value.trim()
+
+  if(task_text == ""){
+    alert('Enter some text');
+    return
+  }
+
+  // creating a new li element
+  let li = document.createElement('li');
+  li.className = "flex justify-between p-2 font-semibold"
+  
+
+  // creating span for li content
+  let span = document.createElement('span')
+  span.className = 'cursor-pointer'
+  span.textContent = task_text;
+  span.onclick = () => span.className = 'line-through';
+  
+  // creating delete button
+  let delbtn = document.createElement('button');
+  delbtn.innerText = 'Delete Task';
+  delbtn.className = 'bg-red-500 px-4 py-2.5 text-white font-semibold rounded-lg'
+  delbtn.onclick = function(){
+    li.remove();
+  }
+
+  // adding span and delete button inside li
+  li.appendChild(span)
+  li.appendChild(delbtn)
+
+  document.querySelector('#task-list').appendChild(li)
+
+})
