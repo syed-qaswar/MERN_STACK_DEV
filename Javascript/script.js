@@ -570,8 +570,11 @@ document.querySelector('#add-btn').addEventListener('click', function(){
   let span = document.createElement('span')
   span.className = 'cursor-pointer'
   span.textContent = task_text;
-  span.onclick = () => span.className = 'line-through';
-  
+  span.onclick = () => {
+    span.classList.toggle('line-through');
+    span.classList.toggle('text-slate-300');
+  }
+
   // creating delete button
   let delbtn = document.createElement('button');
   delbtn.innerText = 'Delete Task';
