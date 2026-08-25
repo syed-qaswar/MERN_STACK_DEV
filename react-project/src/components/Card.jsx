@@ -1,8 +1,8 @@
 function Card(props){
     return(
-        <div>
+        <div className={props.style}>
             <h2>{props.title}</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eveniet quam dignissimos soluta.</p>
+            <p>{props.desc}</p>
             <button>{props.btn}</button>
         </div>
     )

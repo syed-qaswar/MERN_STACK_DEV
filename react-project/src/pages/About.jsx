@@ -1,9 +1,21 @@
-import Navbar from "../components/Navbar";
+import Card from "../components/Card";
 
 function About(){
     return(
         <>
-            <h1>About Page</h1>
+            <main>
+                <section>
+                    <div>
+                        <h1>Our services</h1>
+                        <p>Best services in town</p>
+                    </div>
+                    <div>
+                        <Card title='About Card 1' btn='Add to cart'/>
+                        <Card />
+                        <Card />
+                    </div>
+                </section>
+            </main>
         </>
     )
 }
