@@ -93,3 +93,9 @@ const products = [
 ];
 
 export { products };
+
+
+
+// News website -> Display News -> CNN
+// API from CNN -> Project -> Request -> CNN servers
+// CNN servers -> Response (JSON) -> ReactJS -> Render
