@@ -1,45 +1,39 @@
+import { use } from "react";
 import Card from "./components/Card";
 import { useEffect, useState } from "react";
 
 function App() {
-
   const [products, setProducts] = useState([]);
-  const [users, setUser] = useState([]);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('All');
 
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
+  useEffect(() =>{
+    async function getProducts(){
+      const productResponse = await fetch('http://localhost:5000/api/products');
 
-  useEffect(() => {
+      const productData = await productResponse.json()
 
-    async function getData() {
-
-      const [productResponse, userResponse] = await Promise.all([
-        fetch("http://localhost:5000/api/products"),
-        fetch("http://localhost:5000/api/user")
-      ]);
-
-      const productData = await productResponse.json();
-      const userData = await userResponse.json();
-
-      setProducts(productData);
-      setUser(userData);
+      setProducts(productData)
     }
+    getProducts()
 
-    getData();
+  }, []); //end of useEffect()
 
-  }, []);
+  
+    // array with product categories
+    const categories = [
+      'All',
+      ...new
+      Set(products.map((product) => (
+        product.category
+      )))
+    ];
+    console.log(categories)
 
-
-  // Get unique categories from API data
-  const categories = [
-    "All",
-    ...new Set(products.map((product) => product.category))
-  ];
-
-
+    
   // Filter products
   const filteredProducts = products.filter((product) => {
-
+    // Shirt -> shirt -> included -> products -> title
     const matchesSearch = product.title
       .toLowerCase()
       .includes(search.toLowerCase());
@@ -47,8 +41,12 @@ function App() {
     const matchesCategory =
       category === "All" || product.category === category;
 
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory; //return False
   });
+
+
+  // 5 == 5 //true
+  // 'abc' == 'Abc' //false
 
 
   return (
