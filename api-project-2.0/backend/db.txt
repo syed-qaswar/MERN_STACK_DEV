@@ -1,0 +1,21 @@
+Data -> Objects -> variables
+Data -> Database
+
+SQL , NoSQL
+MySQL -> Tables -> Rows & Columns -> Queries -> CRUD
+MongoDB (NoSQL) -> Documents / Files -> JSON
+
+
+Table -> Collection
+Row -> Document
+Column -> Field (name, age, id)
+
+{
+    'id' : 1,
+    'name' : 'value',
+    'city' : 'value'
+}
+-> Structured 
+-> Fast Read and Write 
+
+api-project-2.0 -> backend -> server.js
