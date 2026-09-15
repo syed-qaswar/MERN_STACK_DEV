@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Product = require("./models/product");
 require('dotenv').config();
 
+// import models
+const Product = require('./models/product');
+
 const app = express();
-
 const PORT = 5000;
-
+// connection string
 const mongoURL = process.env.MONGO;
 
 mongoose.connect(mongoURL)
@@ -19,8 +22,44 @@ mongoose.connect(mongoURL)
 
 
 app.get("/", (req, res) => {
-    res.send("Server is running");
+    res.send("Server is running. MongoDb is connected");
 });
+
+// Product CRUD Operations
+app.post('/api/products', async (req, res) => {
+    try{
+        const {title, price, category, description, image, rating, inStock, reviews} = req.body;
+
+        if(!title || !price || !category){
+            return res.status(404).json({
+                'message': 'Title, price and category not found'
+            })
+        }
+
+        // creating a document
+        const newProduct = new Product(
+            title, 
+            price, 
+            category, 
+            description, 
+            image,
+            rating,
+            inStock, 
+            reviews
+        )
+
+        const savedProduct = await newProduct.save()
+
+        res.status(201).json({
+            'message': 'product create sucessfully'
+        });
+
+    }catch(error){
+        res.status(500).json({
+            'message' : 'Server Error, Products cannot be added' 
+        })
+    }
+})
 
 
 app.listen(PORT, () => {

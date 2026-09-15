@@ -19,3 +19,14 @@ Column -> Field (name, age, id)
 -> Fast Read and Write 
 
 api-project-2.0 -> backend -> server.js
+
+
+Database: react-app
+    collection: products
+        document: {title, price, category}
+        document: {title, price, category}
+        document: {title, price, category}
+    collection: users
+        document: {name, email, city}
+        document: {title, price, category}
+        document: {title, price, category}
