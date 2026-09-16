@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("./models/product");
 require('dotenv').config();
 
 // import models
 const Product = require('./models/product');
+
 
 const app = express();
 const PORT = 5000;
@@ -28,16 +28,17 @@ app.get("/", (req, res) => {
 // Product CRUD Operations
 app.post('/api/products', async (req, res) => {
     try{
+        // data from the user/client side
         const {title, price, category, description, image, rating, inStock, reviews} = req.body;
 
         if(!title || !price || !category){
-            return res.status(404).json({
+            return res.status(400).json({
                 'message': 'Title, price and category not found'
             })
         }
 
         // creating a document
-        const newProduct = new Product(
+        const newProduct = new Product({
             title, 
             price, 
             category, 
@@ -46,12 +47,13 @@ app.post('/api/products', async (req, res) => {
             rating,
             inStock, 
             reviews
-        )
+        })
 
         const savedProduct = await newProduct.save()
 
         res.status(201).json({
-            'message': 'product create sucessfully'
+            'message': 'product create sucessfully',
+            'data' : savedProduct
         });
 
     }catch(error){

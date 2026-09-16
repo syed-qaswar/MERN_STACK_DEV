@@ -30,3 +30,6 @@ Database: react-app
         document: {name, email, city}
         document: {title, price, category}
         document: {title, price, category}
+
+
+Daraz -> seller platform -> form to add products -> title, price, image, etc -> api

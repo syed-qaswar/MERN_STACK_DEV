@@ -41,6 +41,7 @@ function App(){
 
   return(
     <>
+
       {products.map((product) => (
         // {title, description, price}
         <Card 
