@@ -63,7 +63,7 @@ app.post('/api/products', async (req, res) => {
             'message' : 'Server Error, Products cannot be added' 
         })
     }
-}); 
+});
 
 //get data from api
 app.get('/api/products', async (req, res) => {
@@ -81,7 +81,66 @@ app.get('/api/products', async (req, res) => {
             'error' : error.message
         })
     }
+});
+
+// find by id
+app.get('/api/products/:id', async (req, res) => {
+    try{    
+        const productId = req.params.id
+
+        // fetching a single product by ID
+        const product = await Product.findById(productId)
+
+        if(!product){
+            return res.status(404).json({
+                'message' : 'Product not found'
+            })
+        }
+
+        res.json({
+            'message' : 'Product fetched',
+            'data' : product
+        });
+    }catch(error){
+        res.status(500).json({
+            'message' : 'Product cannot be fetched',
+            'error' : error.message
+        })
+    };
+});
+
+// find a product by id and update
+app.put('/api/products/:id', async (req, res) => {
+    try{    
+        const {title, price, category, description, image, rating, inStock, reviews} = req.body;
+
+        const updatedProduct = Product.findByIdAndUpdate(
+            req.params.id,
+            {title, price, category, description, image, rating, inStock, reviews},
+            {new: true}
+        )
+
+        if(!updatedProduct){
+            res.status(404).json({
+                'message' : 'Product not found'
+            })
+        }
+
+        res.json({
+            'message' : 'Product updated successfully',
+            'data' : updatedProduct
+        })
+    }catch(error){
+        res.status(500).json({
+            'message' : 'Products cannot be fetched',
+            'error' : error.message
+        })
+    }
 })
+
+// React Form -> request -> body -> data
+// Id -> product fetch ->
+
 
 
 

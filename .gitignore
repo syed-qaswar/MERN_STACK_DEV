@@ -1,2 +1,12 @@
 api-project-2.0/backend/.env
 react-app-mongo/backend/.env
+mongo-crud/backend/server.js
+mongo-crud/backend/node_modules/.bin/dotenv.cmd
+mongo-crud/backend/node_modules/.bin/dotenv.ps1
+mongo-crud/backend/node_modules/.bin/dotenv
+mongo-crud/backend/node_modules/.package-lock.json
+mongo-crud/backend/.env
+.gitignore
+mongo-crud/backend/package.json
+mongo-crud/backend/package-lock.json
+mongo-crud/backend/node_modules/@mongodb-js/saslprep/package.json
